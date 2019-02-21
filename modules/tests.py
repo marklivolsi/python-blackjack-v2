@@ -1,6 +1,7 @@
 import unittest
 from .game_funcs import *
 from .cards import Card
+from .player import Player, Hand
 
 
 class TestDeckFunctions(unittest.TestCase):
@@ -25,6 +26,18 @@ class TestDeckFunctions(unittest.TestCase):
             draw_pile.append(draw(deck))
         self.assertEqual(len(draw_pile), 53)
         self.assertEqual(len(deck), 51)
+
+
+class TestPlayerFunctions(unittest.TestCase):
+
+    def test_hit(self):
+        """ Test that hit removes one card and adds that card to hand """
+        deck, hand = [], Hand()
+        reload(deck, 1)
+        hit(deck, hand)
+        self.assertEqual(len(deck), 51)
+        self.assertEqual(len(hand.cards), 1)
+        self.assertEqual(hand.cards[0] in deck, False)
 
 
 if __name__ == '__main__':
