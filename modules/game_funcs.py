@@ -42,9 +42,16 @@ def hit(deck, hand):
     hand.cards.append(draw(deck))
 
 
-def double_down(player, hand):  # logic for not enough chips should be handled before doubledown is presented as option
+def double_down(player, hand, deck):  # logic for not enough chips should be handled before doubledown is presented as option
     player.chips -= hand.wager
     hand.wager *= 2
+    hit(deck, hand)
+
+
+def surrender(player, hand):
+    player.chips += hand.wager / 2
+    hand.wager = 0
+    hand.cards = []
 
 
 """ Game functions """

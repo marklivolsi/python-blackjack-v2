@@ -11,6 +11,3 @@ class Card:
 
     def __repr__(self):
         return self.value + ' of ' + self.suit
-
-
-# Deck can just be an array of cards this way.

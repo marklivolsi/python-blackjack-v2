@@ -62,6 +62,14 @@ class TestPlayerFunctions(unittest.TestCase):
         self.assertEqual(player.chips, 150)
         self.assertEqual(hand.wager, 100)
 
+    def test_surrender(self):
+        """ Test surrender returns half of wager and clears hand """
+        player, hand = Player(chips=200), Hand(wager=100)
+        surrender(player, hand)
+        self.assertEqual(len(hand.cards), 0)
+        self.assertEqual(hand.wager, 0)
+        self.assertEqual(player.chips, 250)
+
 
 class TestGameFunctions(unittest.TestCase):
 
