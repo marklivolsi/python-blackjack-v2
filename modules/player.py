@@ -19,12 +19,7 @@ class Hand:
 
     @property
     def points(self):
-        return self.sum_hand_points()
-
-    def sum_hand_points(self):
         total = sum(card.point_value for card in self.cards)
         if total > 21 and any(card.value == 'Ace' for card in self.cards):
             total -= 10
         return total
-
-

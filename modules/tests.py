@@ -50,6 +50,11 @@ class TestGameFunctions(unittest.TestCase):
         s_test = "Joe's hand: [Ace of Diamonds, Two of Clubs] (point total: 13, bet: 50, remaining chips: 500)\n"
         self.assertEqual(s, s_test)
 
+    def test_check_wager(self):
+        """ Test that check wager function returns false if wager exceeds remaining chips """
+        player, hand = Player(chips=200), Hand(wager=300)
+        self.assertEqual(check_wager(hand.wager, player), False)
+
 
 if __name__ == '__main__':
     unittest.main()

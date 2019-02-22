@@ -30,6 +30,12 @@ def hit(deck, hand):
 """ Game functions """
 
 
+def check_wager(wager, player):
+    if wager <= player.chips:
+        return True
+    return False
+
+
 def set_num_players(max_num=Game.max_num_players):
     num_players = None
     while num_players not in range(1, max_num+1):
