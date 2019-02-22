@@ -30,7 +30,7 @@ def get_wager(player):
         if check_wager(wager, player):
             return wager
         else:
-            print("Sorry, you don't have enough chips. Please try again. (remaining chips: {})".format(player.chips))
+            print("Sorry, you don't have enough chips. Please try again. (remaining chips: {})\n".format(player.chips))
             continue
 
 
@@ -43,7 +43,7 @@ def hit(deck, hand):
     hand.cards.append(draw(deck))
 
 
-def double_down(player, hand, deck):  # logic for not enough chips should be handled before doubledown is presented as option
+def double_down(player, hand, deck):  # handle logic for overdrawing chips before function call
     player.chips -= hand.wager
     hand.wager *= 2
     hit(deck, hand)
@@ -55,11 +55,12 @@ def surrender(player, hand):
     hand.cards = []
 
 
-def split_hand(player, hand):
+def split_hand(player, hand):  # handle logic for overdrawing chips before function call
     card = hand.cards.pop()
-    new_hand = Hand()
+    new_hand = Hand(wager=hand.wager)
     new_hand.cards.append(card)
     player.hands.append(new_hand)
+    player.chips -= hand.wager
 
 
 """ Game functions """

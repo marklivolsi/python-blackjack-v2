@@ -57,8 +57,8 @@ class TestPlayerFunctions(unittest.TestCase):
 
     def test_double_down(self):
         """ Test double_down doubles wager and removes chips """
-        player, hand = Player(chips=200), Hand(wager=50)
-        double_down(player, hand)
+        player, hand, deck = Player(chips=200), Hand(wager=50), []
+        double_down(player, hand, deck)
         self.assertEqual(player.chips, 150)
         self.assertEqual(hand.wager, 100)
 
@@ -83,6 +83,18 @@ class TestPlayerFunctions(unittest.TestCase):
         split_hand(player, player.hands[0])
         self.assertEqual(len(player.hands), 2)
         self.assertEqual(player.hands[0].cards, player.hands[1].cards)
+
+    def test_split_hand_wager(self):
+        """ Test split hand sets equal wager on new hand """
+        player, hand1 = Player(chips=200), Hand(wager=50)
+        card = Card('Ace', 'Spades')
+        for _ in range(2):
+            hand1.cards.append(card)
+        player.hands.append(hand1)
+        split_hand(player, player.hands[0])
+        self.assertEqual(player.hands[0].wager, 50)
+        self.assertEqual(player.hands[1].wager, 50)
+        self.assertEqual(player.chips, 150)
 
 
 class TestGameFunctions(unittest.TestCase):
