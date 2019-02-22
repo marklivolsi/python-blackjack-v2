@@ -12,10 +12,5 @@ class Card:
     def __repr__(self):
         return self.value + ' of ' + self.suit
 
-    # def __eq__(self, other):
-    #     if isinstance(other, Card):
-    #         return self.point_value == other.point_value
-    #     return NotImplemented
-
 
 # Deck can just be an array of cards this way.
