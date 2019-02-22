@@ -1,5 +1,5 @@
 from random import shuffle
-from .player import Hand
+from .player import Player, Hand
 from .cards import Card, point_dict, suits
 from .game import Game
 

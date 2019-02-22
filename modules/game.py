@@ -27,3 +27,8 @@ class Game:
         for player in self.player_list:
             for hand in player.hands:
                 print(hand_detail(player, hand))
+
+    def clear_hands(self):
+        self.dealer.hands = []
+        for player in self.player_list:
+            player.hands = []
