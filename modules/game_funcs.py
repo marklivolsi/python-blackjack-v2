@@ -37,13 +37,6 @@ def set_num_players(max_num=Game.max_num_players):
     return num_players
 
 
-def sum_hand_points(hand):
-    total = sum(card.point_value for card in hand)
-    if total > 21 and any(card.value == 'Ace' for card in hand):
-        total -= 10
-    return total
-
-
 def hand_detail(player, hand):  # For printing
     string = "{}'s hand: {} (point total: {}, bet: {}, remaining chips: {})\n".format(player, hand, hand.points,
                                                                                       hand.wager, player.chips)

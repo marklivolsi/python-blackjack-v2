@@ -1,5 +1,3 @@
-# from .game_funcs import sum_hand_points
-
 class Player:
     def __init__(self, number=1, name='Player 1', chips=1000):
         self.number = number
@@ -15,7 +13,6 @@ class Hand:
     def __init__(self, cards=[], wager=0):
         self.cards = cards
         self.wager = wager
-        # self.points = sum_hand_points(self.cards)
 
     def __repr__(self):
         return str(self.cards)
