@@ -23,17 +23,31 @@ def draw(deck):
 """ Player functions """
 
 
+def get_wager(player):
+    while True:
+        wager = int_input('{}, please enter your wager:\n'.format(player))
+        if check_wager(wager, player):
+            return wager
+        else:
+            print("Sorry, you don't have enough chips. Please try again. (remaining chips: {})".format(player.chips))
+            continue
+
+
+def set_wager(wager, player, hand):
+    player.chips -= wager
+    hand.wager += wager
+
+
 def hit(deck, hand):
     hand.cards.append(draw(deck))
 
 
+def double_down(player, hand):  # logic for not enough chips should be handled before doubledown is presented as option
+    player.chips -= hand.wager
+    hand.wager *= 2
+
+
 """ Game functions """
-
-
-def check_wager(wager, player):
-    if wager <= player.chips:
-        return True
-    return False
 
 
 def set_num_players(max_num=Game.max_num_players):
@@ -50,6 +64,10 @@ def hand_detail(player, hand):  # For printing
 
 
 """ Helper functions """
+
+
+def check_wager(wager, player):
+    return wager <= player.chips
 
 
 def int_input(text):

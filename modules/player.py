@@ -10,8 +10,8 @@ class Player:
 
 
 class Hand:
-    def __init__(self, cards=[], wager=0):
-        self.cards = cards
+    def __init__(self, wager=0):
+        self.cards = []
         self.wager = wager
 
     def __repr__(self):

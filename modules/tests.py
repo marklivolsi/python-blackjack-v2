@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 from .game_funcs import *
 from .cards import Card
 from .player import Player, Hand
@@ -38,6 +39,28 @@ class TestPlayerFunctions(unittest.TestCase):
         self.assertEqual(len(deck), 51)
         self.assertEqual(len(hand.cards), 1)
         self.assertEqual(hand.cards[0] in deck, False)
+
+    @patch('modules.game_funcs.int_input', return_value=100)
+    def test_get_wager(self, mock_input):
+        """ Test get_wager function returns wager only if not exceeding remaining chips """
+        player = Player(chips=200)
+        wager = get_wager(player)
+        self.assertEqual(wager, 100)
+
+    def test_set_wager(self):
+        """ Test set_wager correctly deducts from player chips and adds to hand wager """
+        player, hand = Player(chips=200), Hand()
+        wager = 50
+        set_wager(wager, player, hand)
+        self.assertEqual(hand.wager, 50)
+        self.assertEqual(player.chips, 150)
+
+    def test_double_down(self):
+        """ Test double_down doubles wager and removes chips """
+        player, hand = Player(chips=200), Hand(wager=50)
+        double_down(player, hand)
+        self.assertEqual(player.chips, 150)
+        self.assertEqual(hand.wager, 100)
 
 
 class TestGameFunctions(unittest.TestCase):
