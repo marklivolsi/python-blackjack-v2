@@ -1,4 +1,5 @@
 from random import shuffle
+from .player import Hand
 from .cards import Card, point_dict, suits
 from .game import Game
 
@@ -52,6 +53,13 @@ def surrender(player, hand):
     player.chips += hand.wager / 2
     hand.wager = 0
     hand.cards = []
+
+
+def split_hand(player, hand):
+    card = hand.cards.pop()
+    new_hand = Hand()
+    new_hand.cards.append(card)
+    player.hands.append(new_hand)
 
 
 """ Game functions """

@@ -70,6 +70,20 @@ class TestPlayerFunctions(unittest.TestCase):
         self.assertEqual(hand.wager, 0)
         self.assertEqual(player.chips, 250)
 
+    def test_split_hand(self):
+        """ Test split_hand removes card from hand, creates new hand, and adds to players hands list """
+        player, hand1 = Player(), Hand()
+        card = Card('Ace', 'Spades')
+        for _ in range(2):
+            hand1.cards.append(card)
+        player.hands.append(hand1)
+        self.assertEqual(len(player.hands), 1)
+        self.assertEqual(len(player.hands[0].cards), 2)
+
+        split_hand(player, player.hands[0])
+        self.assertEqual(len(player.hands), 2)
+        self.assertEqual(player.hands[0].cards, player.hands[1].cards)
+
 
 class TestGameFunctions(unittest.TestCase):
 
